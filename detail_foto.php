@@ -48,7 +48,7 @@ $query_check = mysqli_query($conn, "SELECT * FROM `like_foto` WHERE `foto_id` = 
         <img src="Asset/img/logo.png" class="logo">
     </div>
     <div class="div-img">
-        <img src="Asset/img/<?php echo $foto['lokasi_file']; ?>" class="img-fluid" style="width:390px; height:490px; padding:10px; ">
+        <img src="Asset/img/<?php echo $foto['lokasi_file']; ?>" class="img-fluid" style="width:320px; height:420px; padding:20px; ">
         <div class="div-detail">
             <div class="comment">
                 <h2 class="text">COMMENTS</h2>
@@ -97,7 +97,9 @@ $query_check = mysqli_query($conn, "SELECT * FROM `like_foto` WHERE `foto_id` = 
                             <p> Diunggah pada <?php echo $tanggal2 ?></p>
                         </td>
                     </tr>
+                    </tr>
                 </table>
+                <p><i><?php echo $foto['deskripsi']?></i></p>
             </div>
         </div>
     </div>

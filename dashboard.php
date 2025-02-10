@@ -6,23 +6,20 @@ $role = $_SESSION['role'];
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard | Galleria</title>
     <link rel="stylesheet" href="asset.css">
     <style>
-        .a:hover {
+            .a:hover {
             color: whitesmoke;
         }
-
         .filled {
             background-color: red;
         }
     </style>
 </head>
-
 <body>
     <div class="card-container">
         <?php
@@ -66,13 +63,15 @@ $role = $_SESSION['role'];
                                 <td><span><a href="like.php?id=<?php echo $row['foto_id'] ?>"><img src="Asset/icon/heart.png" width="16px" height="16px"></a></span></td>
                                 <td><?php echo $total_like ?></td>
                             <?php } else { ?>
-                                <td><span><a href="like.php?id=<?php echo $row['foto_id'] ?>"><i class="uil uil-heart" title="Like"></i></a><?php echo $total_like ?></span></td>
+                                <td><span><a href="like.php?id=<?php echo $row['foto_id'] ?>"><img src="Asset/icon/heart-alt.svg" width="16px" height="16px"></a></span></td>
+                                <td><?php echo $total_like ?></td>
                             <?php } ?>
-                            <td><span><a href="detail_foto.php?id=<?php echo $row['foto_id'] ?>"><i class="uil uil-comment" title="comment"></i></a><?php echo $total_komentar ?></span></td>
+                            <td><span><a href="detail_foto.php?id=<?php echo $row['foto_id'] ?>"><img src="Asset/icon/comment.svg" width="16px" height="16px"></a></span></td>
+                            <td><i style="margin-top: 20px; margin-left:-1px;"><?php echo $total_komentar ?></i></td>
                             <?php if ($role == 'USER') { ?>
-                                <td><span><a href="unduh.php?file=<?php echo $row['lokasi_file'] ?>" onclick="return confirm('Apakah  anda ingin mengunduh foto ini?')"><i class="uil uil-import" title="download"></i></a></span></td>
+                                <td><span><a href="unduh.php?file=<?php echo $row['lokasi_file'] ?>" onclick="return confirm('Apakah  anda ingin mengunduh foto ini?')"><img src="Asset/icon/import.svg" width="16px" height="16px"></a></span></td>
                             <?php } else { ?>
-                                <td><span><a href="delete.php?id=<?php echo $row['foto_id'] ?>" onclick="return confirm('Apakah anda yakin akan menghapus foto ini?')"><i class="uil uil-trash"></i></a></span></td>
+                                <td><span><a href="delete.php?id=<?php echo $row['foto_id'] ?>" onclick="return confirm('Apakah anda yakin akan menghapus foto ini?')"><img src="Asset//icon/trash.svg" width="16px" height="16px"></a></span></td>
                             <?php } ?>
                             <td><img src="Asset/icon/elipsis.svg" width="16px" height="16px" title="Detail like" style="margin-top: 3px; cursor:pointer;" class="openModal" data-id="<?php echo $row['foto_id'] ?>"></td>
 

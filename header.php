@@ -99,12 +99,12 @@ $role = $_SESSION['role'];
             </div>
             <form method="POST" action="search.php">
                 <input type="text" name="isi" placeholder="Cari foto dengan nama foto / username pemilik..." required style="margin-left:10px;" class="text1">
-                <button type="submit" name="search" class="button"><center><i class="uil uil-search"></i></center></button>
+                <button type="submit" name="search" class="button"><center><img src="Asset/icon/search.svg" width="16px" height="16px" style="margin-top: -5px;"></center></button>
             </form>
-            <img src="Asset/icon/reset.svg" width="36px" height="36px" style="cursor:pointer; margin-top:5px;" title="reset" name="reset" onclick="resetSearch()">
-            <span><a href="album.php"><i class="uil uil-folder" style="font-size: 36px;" title="Album"></i></a></span>
-            <span><a href="upload-foto.php"><i class="uil uil-image-plus" style="font-size: 36px;" title="Upload foto"></i></a></span>
-            <span><i class="uil uil-sign-out-alt" style="font-size:36px;" title="logout" onclick="confirmLogout()"></i></span>
+            <img src="Asset/icon/reset.svg" width="36px" height="36px" class="icon" title="reset" name="reset" onclick="resetSearch()">
+            <span><a href="album.php"><img src="Asset/icon/folder.svg" width="36px" height="36px" title="album" class="icon"></a></span>
+            <span><a href="upload-foto.php"><img src="Asset/icon/image-plus.svg" width="36px" height="36px" class="icon" title="tambah foto"></a></span>
+            <span><img src="Asset/icon/logout.svg" class="icon" width="36px" height="36px" title="logout" onclick="confirmLogout()"></span>
         </div>
     <?php } else { ?>
         <div class="header">
@@ -113,7 +113,7 @@ $role = $_SESSION['role'];
             <button class="button_menu" style="background-color: grey; margin-left : 10px;"><a href="master_user.php" class="a">Master User</a></button>
             <form method="POST" action="search.php">
                 <input type="text" placeholder="Cari sesuatu..." required style="margin-left:10px;" class="text1">
-                <button type="submit" class="button"><i class="uil uil-search"></i></button>
+                <button type="submit" name="search" class="button"><center><img src="Asset/icon/search.svg" width="16px" height="16px" style="margin-top: -5px;"></center></button>
             </form>
             <span><a href="tambah_user.php"><i class="uil uil-plus" style="font-size: 36px;" title="Tambah User"></i></a></span>
             <span><i class="uil uil-sign-out-alt" style="font-size:36px;" title="logout" onclick="confirmLogout()"></i></span>

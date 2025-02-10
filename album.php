@@ -41,17 +41,16 @@ $id = $_SESSION['id'];
     </style>
 </head>
 <body>
-    <div class="header" style="background : rgba(232, 235, 234, 0.5);">
+    <div class="header" style="background-color: #E5E1DA; margin-left:0px;">
+    <a href="dashboard.php"><img src="Asset/img/left.svg" class="left"></a>
         <img src="Asset/img/logo.png" class="logo">
-        <button class="button_menu" style="margin-left: 850px;"><a href="dashboard.php" class="a">Dashboard</a></button>
-        <span><a href="tambah_album.php"><i class="uil uil-folder-plus" style="font-size: 48px;" title="Tambah Album"></i></a></span>
-        <span><a href="upload-foto.php"><i class="uil uil-image-plus" style="font-size: 48px;" title="Upload foto"></i></a></span>
-        <span><i class="uil uil-sign-out-alt" style="font-size:48px;" title="logout" onclick="confirmLogout()"></i></span>
+        <span><a href="tambah_album.php"><img src="Asset/icon/folder-plus.svg" width="42px" height="42px" title="Tambah Album" class="icon" style="margin-left: 1000px;"></a></span>
+        <span><a href="upload-foto.php"><img src="Asset/icon/image-plus.svg" width="42px" height="42px" class="icon" title="tambah foto"></a></span>
     </div>
     <div class="box" style="margin-top: 20px;">
         <h3>MY ALBUM</h3>
     </div>
-    <div class="container" style="margin-left: 50px; margin-top:10px;">
+    <div class="container" style="margin-top:10px;">
         <?php
         $query = "SELECT * FROM `album` INNER JOIN `user` ON `album`.`user_id` = `user`.`user_id` WHERE `album`.`user_id` = $id";
         $hasil = mysqli_query($conn, $query);
@@ -59,7 +58,7 @@ $id = $_SESSION['id'];
             $timestamp = strtotime($row['tanggal_buat']);
             $tanggal = date("d M Y", $timestamp);
         ?>
-            <table>
+            <table style="margin-left: 50px; margin-top:15px;">
                 <tr>
                     <td>
                         <span><a href="detail_album.php?id=<?php echo $row['album_id'] ?>"><img src="Asset/icon/album.png" width="100" height="100"></a></span>
