@@ -32,8 +32,8 @@ $query_check = mysqli_query($conn, "SELECT * FROM `like_foto` WHERE `foto_id` = 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detail Foto</title>
-    <link rel="stylesheet" href="asset.css">
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
+    <link rel="stylesheet" href="asset.css">
     <style>
         .span {
             width: 100%;
@@ -50,7 +50,9 @@ $query_check = mysqli_query($conn, "SELECT * FROM `like_foto` WHERE `foto_id` = 
         <img src="Asset/img/logo.png" class="logo">
     </div>
     <div class="div-img">
-        <img src="Asset/img/<?php echo $foto['lokasi_file']; ?>" class="img-fluid" style="width:320px; height:420px; padding:20px; ">
+        <div style="height: 350px; width:100%; justify-content:center;display: flex; padding:5px;">
+          <img src="Asset/img/<?php echo $foto['lokasi_file']; ?>" style=" max-width:100%; max-height:100%; object-fit:contain; object-position:center;">  
+        </div>
         <div class="div-detail">
             <div class="comment">
                 <h2 class="text">COMMENTS</h2>
