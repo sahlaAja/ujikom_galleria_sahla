@@ -13,13 +13,15 @@ $role = $_SESSION['role'];
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
     <link rel="stylesheet" href="Asset/bootstrap/dist/css/bootstrap.min.css">
     <style>
-        .text1{
-            width: 700px;
-            height: 30px;
+        .select{
+            width: 350px;
+            height: auto;
             padding: 10px;
             border: 1px solid #ccc;
             border-radius: 20px;
+            margin-left: 5px;
             margin-top: 5px;
+            font-size: small;
         }
         .button {
             width: 30px;
@@ -98,11 +100,11 @@ $role = $_SESSION['role'];
             <div class="notification-count"><?php echo $row2['unread']?></div>
             </div>
             <form method="POST" action="dashboard.php">
-            <select name="type" id="type" required>
+            <select name="type" id="type" required class="select">
                 <option value="like" <?php echo (isset($_POST['type']) && $_POST['type'] == 'like') ? 'selected' : ''; ?>>Like</option>
                 <option value="comment" <?php echo (isset($_POST['type']) && $_POST['type'] == 'comment') ? 'selected' : ''; ?>>Comment</option>
             </select>
-            <select name="jumlah" id="jumlah" required>
+            <select name="jumlah" id="jumlah" required class="select">
         <option value="banyak" <?php echo (isset($_POST['jumlah']) && $_POST['jumlah'] == 'banyak') ? 'selected' : ''; ?>>Paling banyak</option>
         <option value="dikit" <?php echo (isset($_POST['jumlah']) && $_POST['jumlah'] == 'dikit') ? 'selected' : ''; ?>>Paling sedikit</option>
     </select>
