@@ -37,8 +37,9 @@ $query_check = mysqli_query($conn, "SELECT * FROM `like_foto` WHERE `foto_id` = 
     <style>
         .span {
             width: 100%;
+            height: auto;
             background-color: #8193b6;
-            border-radius: 5px;
+            border-radius: 3px;
         }
        
     </style>

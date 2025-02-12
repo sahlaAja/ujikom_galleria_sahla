@@ -80,7 +80,7 @@ $role = $_SESSION['role'];
                 </tr>
                 <tr>
                     <td><h5>Address</h5></td>
-                    <td><textarea name="alamat" style="resize: none; border-radius : 10px;" cols="21" rows="4"><?php echo $row['alamat']?></textarea></td>
+                    <td><textarea name="alamat" style="resize: none; border-radius : 10px;" cols="22" rows="4"><?php echo $row['alamat']?></textarea></td>
                 </tr>
                 <tr>
                     <td><h5>Username</h5></td>
@@ -120,12 +120,20 @@ $role = $_SESSION['role'];
             <img src="Asset/img/logo.png" class="logo">
             <button class="button_menu"><a href="dashboard.php" class="a">Dashboard</a></button>
             <button class="button_menu" style="background-color: grey; margin-left : 10px;"><a href="master_user.php" class="a">Master User</a></button>
-            <form method="POST" action="search.php">
-                <input type="text" placeholder="Cari sesuatu..." required style="margin-left:10px;" class="text1">
+            <form method="POST" action="dashboard.php">
+            <select name="type" id="type" required class="select">
+                <option value="like" <?php echo (isset($_POST['type']) && $_POST['type'] == 'like') ? 'selected' : ''; ?>>Like</option>
+                <option value="comment" <?php echo (isset($_POST['type']) && $_POST['type'] == 'comment') ? 'selected' : ''; ?>>Comment</option>
+            </select>
+            <select name="jumlah" id="jumlah" required class="select">
+        <option value="banyak" <?php echo (isset($_POST['jumlah']) && $_POST['jumlah'] == 'banyak') ? 'selected' : ''; ?>>Paling banyak</option>
+        <option value="dikit" <?php echo (isset($_POST['jumlah']) && $_POST['jumlah'] == 'dikit') ? 'selected' : ''; ?>>Paling sedikit</option>
+    </select>
                 <button type="submit" name="search" class="button"><center><img src="Asset/icon/search.svg" width="16px" height="16px" style="margin-top: -5px;"></center></button>
             </form>
+            <img src="Asset/icon/reset.svg" width="36px" height="36px" class="icon" title="reset" name="reset" onclick="resetSearch()">
             <span><a href="tambah_user.php"><i class="uil uil-plus" style="font-size: 36px;" title="Tambah User"></i></a></span>
-            <span><i class="uil uil-sign-out-alt" style="font-size:36px;" title="logout" onclick="confirmLogout()"></i></span>
+            <span><img src="Asset/icon/logout.svg" class="icon" width="36px" height="36px" title="logout" onclick="confirmLogout()"></span>
         </div>
     <?php } ?>
 </body>

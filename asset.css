@@ -142,7 +142,7 @@ a:hover {
 }
 
 .button_menu {
-    width: 100px;
+    width: auto;
     height: 30px;
     background-color: black;
     color: white;
@@ -151,6 +151,7 @@ a:hover {
 }
 
 .user {
+    padding: 10px;
     border: 3px #D8C4B6 solid;
 }
 

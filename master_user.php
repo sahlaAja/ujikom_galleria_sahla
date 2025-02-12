@@ -1,5 +1,5 @@
 <?php
-include "header.php";
+include "connection.php";
 $query = mysqli_query($conn, "SELECT * FROM `user` INNER JOIN `role` ON `user`.`role_id` = `role`.`role_id`");
 ?>
 
@@ -20,26 +20,29 @@ $query = mysqli_query($conn, "SELECT * FROM `user` INNER JOIN `role` ON `user`.`
     </style>
 </head>
 <body>
+    <div class="header">
+<a href="dashboard.php" style="margin-left: 20px;"><img src="Asset/img/left.svg" class="left"></a>
     <h1 style="color: #4e97c2;">MASTER USER</h1>
-    <legend>
+    </div>
+
         <?php
         while ($row = mysqli_fetch_assoc($query)):
         ?>
             <div class="user">
-                <table>
+                <table style="white-space: nowrap;">
                     <tr>
                         <td><img src="Asset/img/<?php echo $row['foto_profil'] ?>" alt=""></td>
                         <td>
-                            <h3> | @<?php echo $row['username'] ?></h3>
+                            <h4> | @<?php echo $row['username'] ?></h4>
                         </td>
                         <td>
-                            <h3> | <?php echo $row['name'] ?></h3>
+                            <h4> | <?php echo $row['name'] ?></h4>
                         </td>
                         <td>
-                            <h3> | <?php echo $row['email'] ?></h3>
+                            <h4> | <?php echo $row['email'] ?></h4>
                         </td>
                         <td>
-                            <h3> | <?php echo $row['alamat'] ?></h3>
+                            <h4> | <?php echo $row['alamat'] ?></h4>
                         </td>
                         <td><a href="delete_user.php?id=<?php echo $row['user_id'] ?>" onclick="return confirm('Apakah anda yakin akan menghapus user ini?')"><button style="background-color: red; border-radius:5px;"><i class="uil uil-trash" title="delete" style="color: white;"></i></button></a></td>
                         <?php if ($row['verifikasi'] == 1) { ?>
@@ -52,7 +55,5 @@ $query = mysqli_query($conn, "SELECT * FROM `user` INNER JOIN `role` ON `user`.`
             </div>
             <br>
         <?php endwhile; ?>
-
-    </legend>
 </body>
 </html>
