@@ -54,7 +54,7 @@ include "connection.php";
                         </tr>
                         <tr>
                             <td>
-                                <textarea name="alamat" cols="43" rows="2" placeholder="Masukkan Alamat"></textarea required>
+                                <textarea name="alamat" cols="43" rows="2" placeholder="Masukkan Alamat" style="resize : none;"></textarea required>
             </td>
         </tr>
         <tr>

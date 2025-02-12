@@ -70,7 +70,7 @@ $id = $_SESSION['id'];
                         <h4><?php echo $tanggal ?></h4>
                     </td>
                     <td>
-                        <span><a href="delete_album.php?id_album=<?php echo $row['album_id'] ?>" onclick="return confirm('Apakah anda yakin akan menghapus album ini?')"><i class="uil uil-trash" style="font-size : 36px;"></i></a></span>
+                        <span><a href="delete_album.php?id_album=<?php echo $row['album_id'] ?>" onclick="return confirm('Apakah anda yakin akan menghapus album ini?')"><img src="Asset/icon/trash.svg" width="24px" height="24px"></a></span>
                     </td>
                 </tr>
             </table>

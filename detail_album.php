@@ -96,14 +96,16 @@ if (!empty($hasil)) {
                                     <p>@<?php echo $row['username'] ?></p>
                                 </td>
                                 <?php if ($is_like = mysqli_num_rows($query_check) > 0) { ?>
-                                    <td><span><a href="like.php?id=<?php echo $row['foto_id'] ?>"><img src="Asset/icon/heart.png" width="16px" height="16px"></a></span></td>
+                                    <td><span><a href="like.php?id=<?php echo $row['foto_id'] ?>"><img src="Asset/icon/heart.png" width="16px" height="16px" class="icon"></a></span></td>
                                     <td><?php echo $total_like ?></td>
                                 <?php } else { ?>
-                                    <td><span><a href="like.php?id=<?php echo $row['foto_id'] ?>"><i class="uil uil-heart" title="Like"></i></a><?php echo $total_like ?></span></td>
+                                    <td><span><a href="like.php?id=<?php echo $row['foto_id'] ?>"><img src="Asset/icon/heart-alt.svg" width="16px" height="16px" class="icon"></a></span></td>
+                                    <td><?php echo $total_like ?></td>
                                 <?php } ?>
-                                <td><span><a href="detail_foto.php?id=<?php echo $row['foto_id'] ?>"><i class="uil uil-comment"></i></a><?php echo $total_komentar ?></span></td>
-                                <td><span><a href="delete.php?id=<?php echo $row['foto_id'] ?>" onclick="return confirm('Apakah anda yakin akan menghapus foto ini?')"><i class="uil uil-trash"></i></a></span></td>
-                                <td><span><i class="uil uil-import"></i></span></td>
+                                <td><span><a href="detail_foto.php?id=<?php echo $row['foto_id'] ?>"><img src="Asset/icon/comment.svg" width="16px" height="16px" class="icon"></a></span></td>
+                                <td><?php echo $total_komentar ?></td>
+                                <td><span><a href="delete.php?id=<?php echo $row['foto_id'] ?>" onclick="return confirm('Apakah anda yakin akan menghapus foto ini?')"><img src="Asset/icon/trash.svg" width="16px" height="16px" class="icon"></a></span></td>
+                                <td><span><a href="unduh.php?file=<?php echo $row['lokasi_file']?>" onclick="return confirm('Apakah anda ingin mengunduh foto ini?')"><img src="Asset/icon/import.svg" width="16px" height="16px" title="Unduh" style="margin-top: 3px;"></a></span></td>
                                 <td><img src="Asset/icon/elipsis.svg" width="16px" height="16px" title="Detail like" style="margin-top: 3px; cursor:pointer;" class="openModal" data-id="<?php echo $row['foto_id'] ?>"></td>
 
                                 <div id="likeModal<?php echo $row['foto_id'] ?>" class="modal" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width:auto;

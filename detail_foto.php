@@ -40,6 +40,7 @@ $query_check = mysqli_query($conn, "SELECT * FROM `like_foto` WHERE `foto_id` = 
             background-color: #8193b6;
             border-radius: 5px;
         }
+       
     </style>
 </head>
 <body>
@@ -76,7 +77,7 @@ $query_check = mysqli_query($conn, "SELECT * FROM `like_foto` WHERE `foto_id` = 
                 </table>
             </form>
             <div class="ket">
-                <table style="margin-top : -15px;">
+                <table style="margin-top : -15px; white-space:nowrap;">
                     <tr>
                         <td>
                             <h4>@<?php echo $foto['username'] ?></h4>
@@ -85,10 +86,12 @@ $query_check = mysqli_query($conn, "SELECT * FROM `like_foto` WHERE `foto_id` = 
                             <td><span><a href="like.php?id=<?php echo $foto['foto_id'] ?>"><img src="Asset/icon/heart.png" width="16px" height="16px" style="margin-top: 3px;"></a></span></td>
                             <td><?php echo $total_like ?></td>
                         <?php } else { ?>
-                            <td><span><a href="like.php?id=<?php echo $foto['foto_id'] ?>"><i class="uil uil-heart" title="Like"></i></a><?php echo $total_like ?></span></td>
+                            <td><span><a href="like.php?id=<?php echo $foto['foto_id'] ?>"><img src="Asset/icon/heart-alt.svg" width="16px" height="16px" style="margin-top: 3px;"></a></span></td>
+                            <td><?php echo $total_like ?></td>
                         <?php } ?>
-                        <td><span><i class="uil uil-comment" title="comment" style="font-size: 20px;"><?php echo $total_komentar ?></i></span></td>
-                        <td><span><a href="unduh.php?file=<?php echo $foto['lokasi_file']?>" onclick="return confirm('Apakah anda ingin mengunduh foto ini?')"><i class="uil uil-import" title="download" style="font-size: 20px;"></i></a></span></td>
+                        <td><span><img src="Asset/icon/comment.svg" width="16px" height="16px" style="margin-top: 3px;"></i></span></td>
+                        <td><?php echo $total_komentar ?></td>
+                        <td><span><a href="unduh.php?file=<?php echo $foto['lokasi_file']?>" onclick="return confirm('Apakah anda ingin mengunduh foto ini?')"><img src="Asset/icon/import.svg" width="16px" height="16px" title="Unduh" style="margin-top: 3px;"></a></span></td>
                         <td>|</td>
                         <td>
                             <h4><?php echo $foto['judul_foto'] ?></h4>

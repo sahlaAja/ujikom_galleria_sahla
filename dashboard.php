@@ -26,8 +26,29 @@ $role = $_SESSION['role'];
         $unread = mysqli_query($conn, "SELECT COUNT(*) AS unread FROM `notifikasi` WHERE `penerima_id` = $id AND `pengirim_id` != $id AND `is_read` = 0");
         $result = mysqli_fetch_assoc($unread);
         if (isset($_POST['search'])) {
-            $search = mysqli_real_escape_string($conn, $_POST['isi']);
-            $query = "SELECT * FROM `foto` INNER JOIN `user` ON `foto`.`user_id` = `user`.`user_id` WHERE `judul_foto` LIKE '%$search%' OR `username` LIKE '%$search%'";
+            $type = $_POST['type'];
+            $jumlah = $_POST['jumlah'];
+            if ($type == 'like') {
+                if ($jumlah == 'banyak') {
+                    $query = "SELECT foto.*,user.username, COUNT(like_foto.foto_id) AS total_like 
+                              FROM foto INNER JOIN user ON foto.user_id = user.user_id INNER JOIN like_foto ON foto.foto_id = like_foto.foto_id 
+                              GROUP BY foto.foto_id ORDER BY total_like DESC limit 1";
+                }else{
+                    $query = "SELECT foto.*,user.username, COUNT(like_foto.foto_id) AS total_like 
+                    FROM foto INNER JOIN user ON foto.user_id = user.user_id LEFT JOIN like_foto ON foto.foto_id = like_foto.foto_id 
+                    GROUP BY foto.foto_id ORDER BY total_like ASC limit 1";
+                }
+            }elseif ($type == 'comment') {
+                if ($jumlah == 'banyak') {
+                    $query = "SELECT foto.*,user.username, COUNT(komentar_foto.foto_id) AS total_like 
+                              FROM foto INNER JOIN user ON foto.user_id = user.user_id INNER JOIN komentar_foto ON foto.foto_id = komentar_foto.foto_id 
+                              GROUP BY foto.foto_id ORDER BY total_like DESC limit 1";
+                }else{
+                    $query = "SELECT foto.*,user.username, COUNT(komentar_foto.foto_id) AS total_like 
+                    FROM foto INNER JOIN user ON foto.user_id = user.user_id LEFT JOIN komentar_foto ON foto.foto_id = komentar_foto.foto_id 
+                    GROUP BY foto.foto_id ORDER BY total_like ASC limit 1";
+                }
+            }
         } else {
             $query = "SELECT * FROM `foto` INNER JOIN `user` ON `foto`.`user_id` = `user`.`user_id`";
         }

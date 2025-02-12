@@ -97,8 +97,15 @@ $role = $_SESSION['role'];
             <span><a href="notifikasi.php"><img src="Asset/icon/bell.png" width="36px" height="36px"></a></span>
             <div class="notification-count"><?php echo $row2['unread']?></div>
             </div>
-            <form method="POST" action="search.php">
-                <input type="text" name="isi" placeholder="Cari foto dengan nama foto / username pemilik..." required style="margin-left:10px;" class="text1">
+            <form method="POST" action="dashboard.php">
+            <select name="type" id="type" required>
+                <option value="like" <?php echo (isset($_POST['type']) && $_POST['type'] == 'like') ? 'selected' : ''; ?>>Like</option>
+                <option value="comment" <?php echo (isset($_POST['type']) && $_POST['type'] == 'comment') ? 'selected' : ''; ?>>Comment</option>
+            </select>
+            <select name="jumlah" id="jumlah" required>
+        <option value="banyak" <?php echo (isset($_POST['jumlah']) && $_POST['jumlah'] == 'banyak') ? 'selected' : ''; ?>>Paling banyak</option>
+        <option value="dikit" <?php echo (isset($_POST['jumlah']) && $_POST['jumlah'] == 'dikit') ? 'selected' : ''; ?>>Paling sedikit</option>
+    </select>
                 <button type="submit" name="search" class="button"><center><img src="Asset/icon/search.svg" width="16px" height="16px" style="margin-top: -5px;"></center></button>
             </form>
             <img src="Asset/icon/reset.svg" width="36px" height="36px" class="icon" title="reset" name="reset" onclick="resetSearch()">
@@ -141,6 +148,7 @@ $role = $_SESSION['role'];
             </script>";
         }
     }
+   
 ?>
 
 <script>
@@ -170,7 +178,8 @@ $role = $_SESSION['role'];
 
     //reset
     function resetSearch(){
-        document.querySelector('input[name="isi"]').value = "";
+        document.querySelector('select[name="type"]').selectedIndex = 0;
+        document.querySelector('select[name="jumlah"]').selectedIndex = 0;
         document.querySelector('form').submit(); 
     }
 </script>
