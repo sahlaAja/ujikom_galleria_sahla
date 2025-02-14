@@ -116,23 +116,6 @@ body {
     align-items: center;
 }
 
-
-.register {
-    width: 450px;
-    height: 450px;
-    background-color: #4e97c2;
-    border-radius: 30px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.register2 {
-    width: 370px;
-    height: 370px;
-    background-color: white;
-}
-
 .card-container {
     column-count: 5;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));

@@ -28,11 +28,11 @@ include "connection.php";
         <form class="p-3 mt-3" method="post">
             <div class="form-field d-flex align-items-center">
                 <i class="bi bi-person" style="font-size: 24px;"></i>
-                <input type="text" name="username" id="userName" placeholder="Username">
+                <input type="text" name="username" id="userName" placeholder="Username" required>
             </div>
             <div class="form-field d-flex align-items-center">
                 <i class="bi bi-key" style="font-size: 24px;"></i>
-                <input type="password" name="password" id="pwd" placeholder="Password">
+                <input type="password" name="password" id="pwd" placeholder="Password" required>
             </div>
             <button class="btn mt-3" type="submit" name="submit">Login</button>
         </form>
