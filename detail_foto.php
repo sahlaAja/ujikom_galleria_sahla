@@ -50,7 +50,7 @@ $query_check = mysqli_query($conn, "SELECT * FROM `like_foto` WHERE `foto_id` = 
         <img src="Asset/img/logo.png" class="logo">
     </div>
     <div class="div-img">
-        <div style="height: 350px; width:100%; justify-content:center;display: flex; padding:5px;">
+        <div style="height: 420px; width:100%; justify-content:center;display: flex; padding:5px;">
           <img src="Asset/img/<?php echo $foto['lokasi_file']; ?>" style=" max-width:100%; max-height:100%; object-fit:contain; object-position:center;">  
         </div>
         <div class="div-detail">

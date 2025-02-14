@@ -9,9 +9,10 @@ include "connection.php";
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login | Galleria</title>
     <link rel="stylesheet" href="asset.css">
-    <link href="Asset/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="Asset/bootstrap/dist/css/bootstrap.min.css">
     <script src="Asset/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
     <style>
         .inputan {
             width: 90%;
@@ -19,28 +20,26 @@ include "connection.php";
         }
     </style>
 </head>
-<body>
-    <div class="header">
-        <img src="Asset/img/logo.png" class="logo">
-    </div>
-    <center>
-        <div class="login">
-            <div class="login2">
-                <center>
-                    <h2>LOGIN</h2>
-                </center>
-                <hr>
-                <form method="post">
-                    <input type="text" name="username" class="form-control inputan" placeholder="Masukkan username" required>
-                    <br>
-                    <input type="password" name="password" class="form-control inputan" placeholder="Masukkan password" required>
-                    <br>
-                    <button class="btn btn-primary" type="submit" name="submit" style="margin-left: 60%">Submit</button><br><br>
-                    Belum punya akun? <a href="register.php">Daftar Disini</a>
-            </div>
+<body style="background-color: beige;">
+    <div class="wrapper">
+        <div class="logo">
+        <img src="Asset/img/logo.png">
         </div>
-    </center>
-    </form>
+        <form class="p-3 mt-3" method="post">
+            <div class="form-field d-flex align-items-center">
+                <i class="bi bi-person" style="font-size: 24px;"></i>
+                <input type="text" name="username" id="userName" placeholder="Username">
+            </div>
+            <div class="form-field d-flex align-items-center">
+                <i class="bi bi-key" style="font-size: 24px;"></i>
+                <input type="password" name="password" id="pwd" placeholder="Password">
+            </div>
+            <button class="btn mt-3" type="submit" name="submit">Login</button>
+        </form>
+        <div class="text-center fs-6">
+        Belum punya akun? <a href="register.php">Daftar Disini</a>
+        </div>
+    </div>
 </body>
 </html>
 
