@@ -47,7 +47,7 @@ $query_check = mysqli_query($conn, "SELECT * FROM `like_foto` WHERE `foto_id` = 
 <body>
 <div class="header">
         <a href="dashboard.php"><img src="Asset/img/left.svg" class="left" style="margin-left: 30px;"></a>
-        <img src="Asset/img/logo.png" class="logo">
+        <img src="Asset/img/logo.png" class="logo1">
     </div>
     <div class="div-img">
         <div style="height: 420px; width:100%; justify-content:center;display: flex; padding:5px;">

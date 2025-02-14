@@ -1,7 +1,7 @@
 /* Importing fonts from Google */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600&display=swap');
 * {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Nunito', sans-serif;
 }
 .wrapper {
     max-width: 350px;
@@ -17,6 +17,8 @@
 .logo {
     width: 80px;
     margin: auto;
+    width: 200px;
+    height: 100px;
 }
 
 .logo img {
@@ -97,7 +99,7 @@
 body {
     background-color: beige;
 }
-.logo {
+.logo1 {
     width: 200px;
     height: 100px;
 }

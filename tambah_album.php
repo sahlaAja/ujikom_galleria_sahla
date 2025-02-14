@@ -24,7 +24,7 @@ $data = mysqli_query($conn, "SELECT * FROM `user` WHERE `user_id` = $id");
 <body>
     <div class="header">
         <a href="album.php"><img src="Asset/img/left.svg" class="left"></a>
-        <img src="Asset/img/logo.png" class="logo">
+        <img src="Asset/img/logo.png" class="logo1">
     </div>
     <center>
         <div class="form">

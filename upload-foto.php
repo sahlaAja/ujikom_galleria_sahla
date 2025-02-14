@@ -26,7 +26,7 @@ $data = mysqli_query($conn, "SELECT * FROM `album` INNER JOIN `user`
 <body>
     <div class="header">
         <a href="dashboard.php"><img src="Asset/img/left.svg" class="left"></a>
-        <img src="Asset/img/logo.png" class="logo">
+        <img src="Asset/img/logo.png" class="logo1">
     </div>
     <center>
         <div class="form">

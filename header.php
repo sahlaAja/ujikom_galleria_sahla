@@ -64,7 +64,7 @@ $role = $_SESSION['role'];
         $row2 = mysqli_fetch_array($query2);
     ?>
         <div class="header">
-            <img src="Asset/img/logo.png" class="logo">
+            <img src="Asset/img/logo.png" class="logo1">
             <button class="button_menu"><a href="dashboard.php" class="a">Dashboard</a></button>
           <img src="Asset/img/<?php echo $row['foto_profil'] ?>" width="36px" height="36px" style="border-radius:20px; margin-left:5px; margin-top:10px;" class="openModalProfil" data-id="<?php echo $row['user_id']?>">
           <div id="profil<?php echo $row['user_id']?>" class="profil">
@@ -80,7 +80,7 @@ $role = $_SESSION['role'];
                 </tr>
                 <tr>
                     <td><h5>Address</h5></td>
-                    <td><textarea name="alamat" style="resize: none; border-radius : 10px;" cols="22" rows="4"><?php echo $row['alamat']?></textarea></td>
+                    <td><textarea name="alamat" style="resize: none; border-radius : 10px;" cols="20" rows="4"><?php echo $row['alamat']?></textarea></td>
                 </tr>
                 <tr>
                     <td><h5>Username</h5></td>

@@ -11,6 +11,7 @@ $role = $_SESSION['role'];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard | Galleria</title>
     <link rel="stylesheet" href="asset.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <style>
             .a:hover {
             color: whitesmoke;
@@ -55,7 +56,12 @@ $role = $_SESSION['role'];
         $hasil = mysqli_query($conn, $query);
 
         if ($result['unread'] > 0) {
-            echo "<script>alert('Ada notifikasi baru, harap lihat kotak notifikasi anda!');</script>";
+            echo "<script>
+                Swal.fire({
+                    icon: 'info',
+                    title: 'Ada notifikasi baru, harap lihat kotak notifikasi anda!',
+                });
+                </script>";
         }
         while ($row = mysqli_fetch_assoc($hasil)) :
             $total = $row['foto_id'];

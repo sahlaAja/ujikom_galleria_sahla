@@ -55,7 +55,7 @@ if (!empty($hasil)) {
 <body>
     <div class="header">
         <a href="album.php" style="margin-left: 20px;"><img src="Asset/img/left.svg" class="left"></a>
-        <img src="Asset/img/logo.png" class="logo">
+        <img src="Asset/img/logo.png" class="logo1">
     </div>
     <?php if (!empty($hasil)) {
     ?>

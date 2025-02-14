@@ -43,7 +43,7 @@ $id = $_SESSION['id'];
 <body>
     <div class="header" style="background-color: #E5E1DA; margin-left:0px;">
     <a href="dashboard.php"><img src="Asset/img/left.svg" class="left"></a>
-        <img src="Asset/img/logo.png" class="logo">
+        <img src="Asset/img/logo.png" class="logo1">
         <span><a href="tambah_album.php"><img src="Asset/icon/folder-plus.svg" width="42px" height="42px" title="Tambah Album" class="icon" style="margin-left: 1000px;"></a></span>
         <span><a href="upload-foto.php"><img src="Asset/icon/image-plus.svg" width="42px" height="42px" class="icon" title="tambah foto"></a></span>
     </div>
