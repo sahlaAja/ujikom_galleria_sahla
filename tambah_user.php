@@ -15,76 +15,59 @@ $query = mysqli_query($conn, "SELECT * FROM `role` WHERE `role_id` = 1");
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <style>
         .inputan {
-            width: 100%;
+            margin-left: -10px;
+            width: 420px;
             height: 30px;
         }
     </style>
 </head>
-<body>
-    <div class="header">
-        <a href="dashboard.php"><img src="Asset/img/left.svg" class="left"></a>
-        <img src="Asset/img/logo.png" class="logo">
+<body style="background-color: beige;">
+    <div style="margin-top: 20px; display:flex;align-items: center; margin-left:40%;">
+    <a href="dashboard.php"><img src="Asset/img/left.svg" class="left"></a>
+    <h1>Tambah Admin</h1>
     </div>
-    <center>
-        <div class="register">
-            <div class="register2">
-                <center>
-                    <h2>Tambah User</h2>
-                </center>
-                <hr>
-                <form method="post" enctype="multipart/form-data">
-                    <table style="width : 90%">
-                        <tr>
-                            <td>
-                                <input type="text" name="username" class="form-control inputan" placeholder="Masukkan username" required>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <input type="text" name="password" class="form-control inputan" placeholder="Masukkan password" required>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <select name="role" class="inputan">
+    
+    <div class="wrapper" style="max-width: 500px; margin-top:20px;">
+        <div class="logo">
+        <img src="Asset/img/logo.png">
+        </div>
+        <form class="p-3 mt-3" method="post" enctype="multipart/form-data">
+            <div class="form-field d-flex align-items-center">
+                <i class="bi bi-person" style="font-size: 16px;"></i>
+                <input type="text" name="username" id="userName" placeholder="Masukkan Username" required>
+            </div>
+            <div class="form-field d-flex align-items-center">
+                <i class="bi bi-key" style="font-size: 16px;"></i>
+                <input type="password" name="password" id="pwd" placeholder="Masukkan Password" required>
+            </div>
+            <div class="form-field d-flex align-items-center">
+            <select name="role" class="inputan">
                                     <?php
                                     while ($row = mysqli_fetch_assoc($query)):
                                     ?>
                                         <option value="<?php echo $row['role_id'] ?>"><?php echo $row['name_role'] ?></option>
                                     <?php endwhile; ?>
                                 </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <input type="email" name="email" class="form-control inputan" placeholder="Masukkan email" required>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <input type="text" name="name" class="form-control inputan" placeholder="Masukkan Nama Lengkap" required>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <textarea name="alamat" cols="43" rows="2" placeholder="Masukkan Alamat"></textarea required>
-            </td>
-        </tr>
-        <tr>
-            <td>
+            </div>
+            <div class="form-field d-flex align-items-center">
+                <i class="bi bi-envelope" style="font-size: 16px;"></i>
+                <input type="text" name="email" placeholder="email" required>
+            </div>
+            <div class="form-field d-flex align-items-center">
+                <i class="bi bi-person-fill" style="font-size: 16px;"></i>
+                <input type="text" name="name" placeholder="name" required>
+            </div>
+            <div class="form-field d-flex align-items-center">
+                <i class="bi bi-house-door" style="font-size: 16px;"></i>
+                <input type="text" name="alamat" placeholder="Address" required>
+            </div>
+            <div class="form-field d-flex align-items-center" style="height: 40px;">
+                <i class="bi bi-file-image" style="font-size: 16px;"></i>
                 <input type="file" name="file" required>
-            </td>
-        </tr>
-        <tr>
-            <td>
-            <button class="btn btn-primary" type="submit" name="submit" style="margin-left: 80%">Daftar</button>
-            </td>
-        </tr>
-    </table>
+            </div>
+            <button class="btn mt-3" type="submit" name="submit">Tambah</button>
+        </form>
     </div>
-    </div>
-    </center>
-    </form>
 </body>
 </html>
 
@@ -106,7 +89,7 @@ if (isset($_POST['submit'])) {
         <script>
             Swal.fire({
                 icon: 'success',
-                title: 'data user berhasil tersimpan!',
+                title: 'data admin berhasil tersimpan!',
                 text: 'Mengalihkan ke Dashboard',
                 showConfirmButton: false,
                 timer: 1500

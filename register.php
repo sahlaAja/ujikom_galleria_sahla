@@ -54,7 +54,7 @@ include "connection.php";
                 <i class="bi bi-file-image" style="font-size: 16px;"></i>
                 <input type="file" name="file" required>
             </div>
-            <button class="btn mt-3" type="submit" name="submit">Login</button>
+            <button class="btn mt-3" type="submit" name="submit">Register</button>
         </form>
         <div class="text-center fs-6">
         Sudah punya akun? <a href="login.php">Login</a>
