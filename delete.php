@@ -25,7 +25,14 @@ if ($id) {
 if ($query) {
     echo "
         <script>
-                window.history.back();
+        Swal.fire({
+                    icon: 'success',
+                    title: 'Foto berhasil di hapus!',
+                    showConfirmButton: false,
+                    timer: 1500
+                }).then(function() {
+                    window.history.back();
+                });
         </script>
         ";
 } else {

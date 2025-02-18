@@ -1,3 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+</head>
+<body>
+    
+</body>
+</html>
+
 <?php
 include "connection.php";
 $album = intval($_GET['id_album']); 
@@ -14,9 +27,14 @@ if ($album) {
         if ($delete_album) {
             echo "
             <script>
-                window.location.href = 'album.php';
-                alert('Album berhasil di hapus');
-                    
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Album berhasil di hapus!',
+                    showConfirmButton: false,
+                    timer: 1500
+                }).then(function() {
+                    window.location.href='album.php';
+                });    
             </script>
             ";
         } else {

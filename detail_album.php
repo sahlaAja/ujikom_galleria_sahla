@@ -4,7 +4,7 @@ $id = $_SESSION['id'];
 $album = $_GET['id'];
 // select data album
 $data1 = mysqli_query($conn, "SELECT * FROM `album` INNER JOIN `user` ON `album`.`user_id` = `user`.`user_id`
-WHERE `album`.`user_id` = $id");
+WHERE `album`.`user_id` = $id AND `album`.`album_id` = $album");
 // select data foto
 $data2 = mysqli_query($conn, "SELECT * FROM `foto` INNER JOIN `album` ON `foto`.`album_id` = `album`.`album_id`
 INNER JOIN `user` ON `foto`.`user_id` = `user`.`user_id`

@@ -94,7 +94,7 @@ $role = $_SESSION['role'];
                                 <td><?php echo $total_like ?></td>
                             <?php } ?>
                             <td><span><a href="detail_foto.php?id=<?php echo $row['foto_id'] ?>"><img src="Asset/icon/comment.svg" width="16px" height="16px"></a></span></td>
-                            <td><i style="margin-top: 20px; margin-left:-1px;"><?php echo $total_komentar ?></i></td>
+                            <td><?php echo $total_komentar ?></td>
                             <?php if ($role == 'USER') { ?>
                                 <td><span><a href="unduh.php?file=<?php echo $row['lokasi_file'] ?>" onclick="return confirm('Apakah  anda ingin mengunduh foto ini?')"><img src="Asset/icon/import.svg" width="16px" height="16px"></a></span></td>
                             <?php } else { ?>
