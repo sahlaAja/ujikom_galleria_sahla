@@ -12,7 +12,7 @@
 include "connection.php";
 $id = $_SESSION['id'];
 
-$query = mysqli_query($conn, "SELECT * FROM `notifikasi` WHERE `penerima_id` = $id AND `pengirim_id` != $id AND `is_read` = 1");
+$query = mysqli_query($conn, "SELECT * FROM `notifikasi` WHERE `penerima_id` = $id AND `pengirim_id` != $id AND `is_read` = 1 ORDER BY `created_at` DESC");
 
 if (mysqli_num_rows($query) > 0) {
 while($result = mysqli_fetch_assoc($query)):

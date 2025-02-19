@@ -62,6 +62,15 @@ if (isset($_POST['submit'])) {
     $desk = $_POST['deskripsi'];
     $tanggal = $_POST['tanggal'];
 
+    $cek_query = mysqli_query($conn, "SELECT * FROM `album` WHERE `nama_album`= '$judul' AND `user_id` = $id");
+    if (mysqli_num_rows($cek_query) > 0) {
+       echo "<script>
+       Swal.fire({
+        icon: 'info',
+        title: 'Nama album sudah ada, harap ubah terlebih dahulu!',
+    });
+            </script>";
+    }else{
     $query = mysqli_query($conn, "INSERT INTO `album` (nama_album, deskripsi, tanggal_buat, user_id)
         VALUES ('$judul', '$desk', '$tanggal','$id')");
 
@@ -89,5 +98,6 @@ if (isset($_POST['submit'])) {
                 </script>
                 ";
     }
+}
 }
 ?>

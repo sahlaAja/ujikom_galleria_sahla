@@ -161,6 +161,12 @@ $role = $_SESSION['role'];
 ?>
 
 <script>
+    window.addEventListener('pageshow', function(event) {
+        if (event.persisted) {
+            location.reload();
+        }
+    });
+    
     function confirmLogout() {
         var confirmation = confirm("Apakah Anda yakin ingin logout?");
 

@@ -32,22 +32,22 @@ $role = $_SESSION['role'];
             if ($type == 'like') {
                 if ($jumlah == 'banyak') {
                     $query = "SELECT foto.*,user.username, COUNT(like_foto.foto_id) AS total_like 
-                              FROM foto INNER JOIN user ON foto.user_id = user.user_id INNER JOIN like_foto ON foto.foto_id = like_foto.foto_id 
-                              GROUP BY foto.foto_id ORDER BY total_like DESC limit 1";
+                              FROM foto INNER JOIN user ON foto.user_id = user.user_id LEFT JOIN like_foto ON foto.foto_id = like_foto.foto_id 
+                              GROUP BY foto.foto_id ORDER BY total_like DESC";
                 }else{
                     $query = "SELECT foto.*,user.username, COUNT(like_foto.foto_id) AS total_like 
                     FROM foto INNER JOIN user ON foto.user_id = user.user_id LEFT JOIN like_foto ON foto.foto_id = like_foto.foto_id 
-                    GROUP BY foto.foto_id ORDER BY total_like ASC limit 1";
+                    GROUP BY foto.foto_id ORDER BY total_like ASC";
                 }
             }elseif ($type == 'comment') {
                 if ($jumlah == 'banyak') {
                     $query = "SELECT foto.*,user.username, COUNT(komentar_foto.foto_id) AS total_like 
-                              FROM foto INNER JOIN user ON foto.user_id = user.user_id INNER JOIN komentar_foto ON foto.foto_id = komentar_foto.foto_id 
-                              GROUP BY foto.foto_id ORDER BY total_like DESC limit 1";
+                              FROM foto INNER JOIN user ON foto.user_id = user.user_id LEFT JOIN komentar_foto ON foto.foto_id = komentar_foto.foto_id 
+                              GROUP BY foto.foto_id ORDER BY total_like DESC";
                 }else{
                     $query = "SELECT foto.*,user.username, COUNT(komentar_foto.foto_id) AS total_like 
                     FROM foto INNER JOIN user ON foto.user_id = user.user_id LEFT JOIN komentar_foto ON foto.foto_id = komentar_foto.foto_id 
-                    GROUP BY foto.foto_id ORDER BY total_like ASC limit 1";
+                    GROUP BY foto.foto_id ORDER BY total_like ASC";
                 }
             }
         } else {
@@ -97,8 +97,6 @@ $role = $_SESSION['role'];
                             <td><?php echo $total_komentar ?></td>
                             <?php if ($role == 'USER') { ?>
                                 <td><span><a href="unduh.php?file=<?php echo $row['lokasi_file'] ?>" onclick="return confirm('Apakah  anda ingin mengunduh foto ini?')"><img src="Asset/icon/import.svg" width="16px" height="16px"></a></span></td>
-                            <?php } else { ?>
-                                <td><span><a href="delete.php?id=<?php echo $row['foto_id'] ?>" onclick="return confirm('Apakah anda yakin akan menghapus foto ini?')"><img src="Asset//icon/trash.svg" width="16px" height="16px"></a></span></td>
                             <?php } ?>
                             <td><img src="Asset/icon/elipsis.svg" width="16px" height="16px" title="Detail like" style="margin-top: 3px; cursor:pointer;" class="openModal" data-id="<?php echo $row['foto_id'] ?>"></td>
 
