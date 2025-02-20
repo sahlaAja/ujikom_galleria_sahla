@@ -13,6 +13,14 @@ $role = $_SESSION['role'];
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
     <link rel="stylesheet" href="Asset/bootstrap/dist/css/bootstrap.min.css">
     <style>
+         .text1{
+            width: 700px;
+            height: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            margin-top: 5px;
+        }
         .select{
             width: 350px;
             height: auto;

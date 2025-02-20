@@ -21,6 +21,7 @@ include "connection.php";
     </style>
 </head>
 <body style="background-color: beige;">
+    <a href="index.php"><img src="Asset/img/left.svg" class="left" style="margin-left: 30px; margin-top:20px;"></a>
     <div class="wrapper">
         <div class="logo">
         <img src="Asset/img/logo.png">
