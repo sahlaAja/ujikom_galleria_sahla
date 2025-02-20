@@ -41,10 +41,6 @@ $data = mysqli_query($conn, "SELECT * FROM `user` WHERE `user_id` = $id");
                     <tr>
                         <td><textarea name="deskripsi" cols="50" rows="3" class="input" placeholder="Masukkan Deskripsi Album"></textarea></td>
                     </tr>
-                    <tr>
-                        <td><input type="date" name="tanggal" required class="input" required></td>
-                    </tr>
-
 
                     <tr>
                         <td><button type="submit" name="submit" class="btn btn-primary" style="margin-left : 90%">Upload</button></td>
@@ -60,7 +56,7 @@ $data = mysqli_query($conn, "SELECT * FROM `user` WHERE `user_id` = $id");
 if (isset($_POST['submit'])) {
     $judul = $_POST['nama_album'];
     $desk = $_POST['deskripsi'];
-    $tanggal = $_POST['tanggal'];
+    $date = date('Y-m-d H:i:s');
 
     $cek_query = mysqli_query($conn, "SELECT * FROM `album` WHERE `nama_album`= '$judul' AND `user_id` = $id");
     if (mysqli_num_rows($cek_query) > 0) {
@@ -72,7 +68,7 @@ if (isset($_POST['submit'])) {
             </script>";
     }else{
     $query = mysqli_query($conn, "INSERT INTO `album` (nama_album, deskripsi, tanggal_buat, user_id)
-        VALUES ('$judul', '$desk', '$tanggal','$id')");
+        VALUES ('$judul', '$desk', '$date','$id')");
 
     if ($query) {
         echo "

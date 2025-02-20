@@ -26,9 +26,10 @@ $role = $_SESSION['role'];
         <?php
         $unread = mysqli_query($conn, "SELECT COUNT(*) AS unread FROM `notifikasi` WHERE `penerima_id` = $id AND `pengirim_id` != $id AND `is_read` = 0");
         $result = mysqli_fetch_assoc($unread);
-        if (isset($_POST['search'])) {
-            $type = $_POST['type'];
-            $jumlah = $_POST['jumlah'];
+
+        if (isset($_GET['filter'])) {
+            $type = $_GET['type'];
+            $jumlah = $_GET['jumlah'];
             if ($type == 'like') {
                 if ($jumlah == 'banyak') {
                     $query = "SELECT foto.*,user.username, COUNT(like_foto.foto_id) AS total_like 
@@ -50,6 +51,15 @@ $role = $_SESSION['role'];
                     GROUP BY foto.foto_id ORDER BY total_like ASC";
                 }
             }
+        }
+
+        if (isset($_POST['search'])) {
+            if (isset($_POST['search'])) {
+                $search = mysqli_real_escape_string($conn,$_POST['isi']);
+                $query = "SELECT * FROM `foto` INNER JOIN `user` ON `foto`.`user_id` = `user`.`user_id` WHERE `judul_foto` LIKE '%$search%' OR `username` LIKE '%$search%'";
+            }else{
+              $query = "SELECT * FROM `foto` INNER JOIN `user` ON `foto`.`user_id` = `user`.`user_id`";  
+            }   
         } else {
             $query = "SELECT * FROM `foto` INNER JOIN `user` ON `foto`.`user_id` = `user`.`user_id`";
         }
@@ -127,7 +137,8 @@ $role = $_SESSION['role'];
 
 </html>
 
-<script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js">
+
     window.addEventListener('pageshow', function(event) {
         if (event.persisted) {
             location.reload();

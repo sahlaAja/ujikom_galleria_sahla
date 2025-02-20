@@ -44,9 +44,6 @@ $data = mysqli_query($conn, "SELECT * FROM `album` INNER JOIN `user`
                         <td><input type="text" name="deskripsi" required class="input" placeholder="Masukkan Deskripsi Foto"></td>
                     </tr>
                     <tr>
-                        <td><input type="date" name="tanggal" required class="input"></td>
-                    </tr>
-                    <tr>
                         <td><input type="file" name="file" required></td>
                     </tr>
                     <tr>
@@ -90,12 +87,12 @@ $data = mysqli_query($conn, "SELECT * FROM `album` INNER JOIN `user`
 if (isset($_POST['submit'])) {
     $judul = $_POST['judul'];
     $desk = $_POST['deskripsi'];
-    $tanggal = $_POST['tanggal'];
+    $date = date('Y-m-d H:i:s');
     $file = $_FILES['file']['name'];
     $album = $_POST['album'];
 
     $query = mysqli_query($conn, "INSERT INTO `foto` (judul_foto, deskripsi, tanggal_unggah, lokasi_file, album_id, user_id)
-        VALUES ('$judul', '$desk', '$tanggal', '$file', '$album', '$id')");
+        VALUES ('$judul', '$desk', '$date', '$file', '$album', '$id')");
 
     if ($query) {
         echo "
