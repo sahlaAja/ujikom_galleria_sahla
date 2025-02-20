@@ -100,7 +100,7 @@ $role = $_SESSION['role'];
                             <?php } ?>
                             <td><img src="Asset/icon/elipsis.svg" width="16px" height="16px" title="Detail like" style="margin-top: 3px; cursor:pointer;" class="openModal" data-id="<?php echo $row['foto_id'] ?>"></td>
 
-                            <div id="likeModal<?php echo $row['foto_id'] ?>" class="modal" style="width:100%;height: 300px; display: none;top: 50%; left: 50%; transform: translate(-50%, -50%); width:auto;
+                            <div id="likeModal<?php echo $row['foto_id'] ?>" class="modal" style="width:400px;height: 300px; display: none;top: 50%; left: 50%; transform: translate(-50%, -50%); width:auto;
                             background: white; padding: 20px; box-shadow: 0px 0px 10px rgba(0,0,0,0.5);">
                                 <h3>Riwayat Like "<?php echo $row['judul_foto'] ?>"</h3>
                                 <?php
