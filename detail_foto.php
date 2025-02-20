@@ -57,14 +57,44 @@ $query_check = mysqli_query($conn, "SELECT * FROM `like_foto` WHERE `foto_id` = 
             <div class="comment">
                 <h2 class="text">COMMENTS</h2>
                 <table>
-                    <?php while ($komentar = mysqli_fetch_assoc($query_komentar)):
-                        $timestamp = strtotime($komentar['tanggal_komentar']);
-                        $tanggal = date("d M Y", $timestamp);
+                    
+                    <?php
+                    function timeAgo($timestamp){
+                        $now_time = time();
+                        $perubahan = $now_time - $timestamp;
+                        $result = $perubahan;
+
+                        $minutes = round($result / 60);
+                        $hours = round($result / 3600);
+                        $days = round($result / 86400);
+                        $weeks = round($result / 604800);
+                        $months = round($result / 2628000); 
+                        $years = round($result / 31536000);
+
+                        if ($result <= 60) {
+                            return "Just now";
+                        } else if ($minutes <= 60) {
+                            return ($minutes == 1) ? "one minute ago" : "$minutes minutes ago";
+                        } else if ($hours <= 24) {
+                            return ($hours == 1) ? "one hour ago" : "$hours hours ago";
+                        } else if ($days <= 7) {
+                            return ($days == 1) ? "yesterday" : "$days days ago";
+                        } else if ($weeks <= 4.3) { // 4.3 == 30/7
+                            return ($weeks == 1) ? "one week ago" : "$weeks weeks ago";
+                        } else if ($months <= 12) {
+                            return ($months == 1) ? "one month ago" : "$months months ago";
+                        } else {
+                            return ($years == 1) ? "one year ago" : "$years years ago";
+                        }
+                    }
+
+                    while ($komentar = mysqli_fetch_assoc($query_komentar)):
+                        $comment_time = strtotime($komentar['tanggal_komentar']);
                     ?>
                         <tr>
                             <td><span class="span"><b>@<?php echo $komentar['username']; ?></b></span></td>
                             <td>
-                                <p class="text"><?php echo nl2br($komentar['isi_komentar']); ?> | <?php echo $tanggal ?></p>
+                                <p class="text"><?php echo nl2br($komentar['isi_komentar']); ?> | <i style="font-size: 14px;"><?php echo timeAgo($comment_time); ?></i></p>
                             </td>
                         </tr>
                     <?php endwhile; ?>

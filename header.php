@@ -150,6 +150,7 @@ $role = $_SESSION['role'];
         if ($update) {
             echo "<script>
             alert('Data profil berhasil di update!');
+            window.location.href = window.location.href;
             </script>";
         }else{
             echo "<script>
