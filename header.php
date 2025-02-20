@@ -135,7 +135,7 @@ $role = $_SESSION['role'];
                 <span><a href="notifikasi.php"><img src="Asset/icon/bell.png" width="36px" height="36px"></a></span>
                 <div class="notification-count"><?php echo $row2['unread'] ?></div>
             </div>
-            <form action="dashboard.php" method="get">
+            <form action="dashboard.php" method="post">
             <select name="type" id="type" required class="select">
                     <option value="like" <?php echo (isset($_POST['type']) && $_POST['type'] == 'like') ? 'selected' : ''; ?>>Like</option>
                     <option value="comment" <?php echo (isset($_POST['type']) && $_POST['type'] == 'comment') ? 'selected' : ''; ?>>Comment</option>

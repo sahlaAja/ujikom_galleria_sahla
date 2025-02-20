@@ -20,10 +20,15 @@ $role = $_SESSION['role'];
             <img src="Asset/img/logo.png" class="logo1">
         </div>
     <h2 style="margin-top: 15px; margin-left:10px;">Insight Report</h2>
+    <?php
+    $query_like_count = mysqli_query($conn, "SELECT COUNT(*) AS total_like FROM `like_foto` WHERE `user_id` = $id");
+    $row_like_count = mysqli_fetch_assoc($query_like_count);
+    $total_like = $row_like_count['total_like'];
+    ?>
     <div class="card" style="width: 18rem; margin-left:10px; margin-top:2rem;">
   <div class="card-body">
-    <h5 class="card-title">Card title</h5>
-    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+    <h5 class="card-title">TOTAL LIKE</h5>
+    <b><h4 class="card-subtitle mb-2 text-muted"><?php echo $total_like?></h4></b>
     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
     <a href="#" class="card-link">Card link</a>
     <a href="#" class="card-link">Another link</a>
