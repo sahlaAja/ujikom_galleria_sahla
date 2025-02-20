@@ -17,7 +17,8 @@ include "connection.php";
             text-decoration: none;
         }
         .a:hover {
-            color: grey;
+            color: white;
+            text-decoration: underline;
         }
 
         .filled {
@@ -48,12 +49,12 @@ include "connection.php";
     <div class="header">
         <img src="Asset/img/logo.png" class="logo1">
         <form method="POST">
-        <input type="text" name="isi" placeholder="Cari foto dengan nama foto / username pemilik..." required style="margin-left:10px;" class="text1">
+        <input type="text" name="isi" placeholder="Cari foto dengan nama foto / username pemilik..." required class="text1">
                 <button type="submit" name="search" class="button"><center><img src="Asset/icon/search.svg" width="16px" height="16px"></center></button>
         </form>
         <img src="Asset/icon/reset.svg" width="30px" height="30px" class="icon" title="reset" name="reset" onclick="resetSearch()" style="margin-left:3px;margin-top: 3px;">
         <button class="button_menu" style="margin-top: -1px; margin-left:3px; width : 130px;"><a href="login.php" class="a">LOGIN</a></button>
-        <button class="button_menu" style="margin-top: -1px; margin-left:3px; background-color:#4e97c2; width:130px;"><a href="register.php" class="a">REGISTER</a></button>
+        <button class="button_menu" style="margin-top: -1px; margin-left:7px; background-color:#4e97c2; width:130px;"><a href="register.php" class="a">REGISTER</a></button>
     </div>
     </div>
     <div class="card-container">

@@ -15,6 +15,10 @@ include "connection.php";
 $id = $_GET['id'];
 $user = $_SESSION['id'];
 $date = date("Y-m-d H:i:s");
+$query_foto = mysqli_query($conn, "SELECT user_id FROM `foto` WHERE `foto_id` = $id");
+$penerima = mysqli_fetch_array($query_foto);
+$penerima_id = $penerima['user_id'];
+
 
 $query = mysqli_query($conn, "SELECT * FROM `like_foto` INNER JOIN `user`ON `like_foto`.`user_id` = `user`.`user_id` WHERE `like_foto`.`foto_id` = $id AND `like_foto`.`user_id` = $user");
 
@@ -38,7 +42,7 @@ if (mysqli_num_rows($query) > 0) {
         ";
     }
 } else {
-    $query_like = mysqli_query($conn, "INSERT INTO `like_foto` (foto_id, user_id, tanggal_like) VALUES ('$id','$user','$date')");
+    $query_like = mysqli_query($conn, "INSERT INTO `like_foto` (foto_id, user_id, penerima_id, tanggal_like) VALUES ('$id', '$penerima_id','$user','$date')");
     if ($query_like) {
         // Ambil username untuk notifikasi
         $user_query = mysqli_query($conn, "SELECT `username` FROM `user` WHERE `user_id` = $user");

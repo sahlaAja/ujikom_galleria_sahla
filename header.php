@@ -15,7 +15,7 @@ $role = $_SESSION['role'];
     <link rel="stylesheet" href="Asset/bootstrap/dist/css/bootstrap.min.css">
     <style>
         .text1 {
-            width: 400px;
+            width: 690px;
             height: 30px;
             padding: 10px;
             border: 1px solid #ccc;
@@ -29,8 +29,9 @@ $role = $_SESSION['role'];
             padding: 5px;
             border: 1px solid #ccc;
             border-radius: 20px;
-            margin-left: 5px;
-            margin-top: 5px;
+            margin-left: 50px;
+            margin-top: 10px;
+            margin-bottom: 15px;
             font-size: small;
         }
 
@@ -92,7 +93,7 @@ $role = $_SESSION['role'];
     ?>
         <div class="header">
             <img src="Asset/img/logo.png" class="logo1">
-            <button class="button_menu"><a href="report.php" class="a">Report</a></button>
+            <button class="button_menu"><a href="report.php" class="a">Insight Report</a></button>
             <img src="Asset/img/<?php echo $row['foto_profil'] ?>" width="36px" height="36px" style="border-radius:20px; margin-left:5px; margin-top:10px;" class="openModalProfil" data-id="<?php echo $row['user_id'] ?>">
             <div id="profil<?php echo $row['user_id'] ?>" class="profil">
                 <center>
@@ -135,17 +136,6 @@ $role = $_SESSION['role'];
                 <span><a href="notifikasi.php"><img src="Asset/icon/bell.png" width="36px" height="36px"></a></span>
                 <div class="notification-count"><?php echo $row2['unread'] ?></div>
             </div>
-            <form action="dashboard.php" method="post">
-            <select name="type" id="type" required class="select">
-                    <option value="like" <?php echo (isset($_POST['type']) && $_POST['type'] == 'like') ? 'selected' : ''; ?>>Like</option>
-                    <option value="comment" <?php echo (isset($_POST['type']) && $_POST['type'] == 'comment') ? 'selected' : ''; ?>>Comment</option>
-                </select>
-                <select name="jumlah" id="jumlah" required class="select">
-                    <option value="banyak" <?php echo (isset($_POST['jumlah']) && $_POST['jumlah'] == 'banyak') ? 'selected' : ''; ?>>Paling banyak</option>
-                    <option value="dikit" <?php echo (isset($_POST['jumlah']) && $_POST['jumlah'] == 'dikit') ? 'selected' : ''; ?>>Paling sedikit</option>
-                </select>
-                <button type="submit" name="filter" class="button_menu">Filter</button>
-            </form>
             <form method="POST" action="dashboard.php">
                 <input type="text" name="isi" placeholder="Cari foto dengan nama foto / username pemilik..." required style="margin-left:10px;" class="text1">
                 <button type="submit" name="search" class="button">

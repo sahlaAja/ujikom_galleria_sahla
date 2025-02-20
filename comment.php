@@ -31,7 +31,7 @@ if (isset($_POST['kirim'])) {
      $message = "@$username memberi komentar -$komentar- pada postingan $judul Anda ";
 
 
-    $query = mysqli_query($conn, "INSERT INTO `komentar_foto` (foto_id, user_id, isi_komentar, tanggal_komentar) VALUES ('$id','$user','$komentar','$date')");
+    $query = mysqli_query($conn, "INSERT INTO `komentar_foto` (foto_id, user_id, penerima_id, isi_komentar, tanggal_komentar) VALUES ('$id','$user',$user_id,'$komentar','$date')");
 
     if ($query) {
         $notification_query = mysqli_query($conn, "INSERT INTO `notifikasi` (`penerima_id`, `pengirim_id`, `message`) 

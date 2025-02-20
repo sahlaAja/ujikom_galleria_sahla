@@ -6,6 +6,7 @@ $role = $_SESSION['role'];
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,54 +14,96 @@ $role = $_SESSION['role'];
     <link rel="stylesheet" href="asset.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <style>
-            .a:hover {
+        .a:hover {
             color: whitesmoke;
         }
+
         .filled {
             background-color: red;
         }
     </style>
 </head>
+
 <body>
+    <form method="post">
+        <select name="type" id="type" required class="select">
+            <option value="like" <?php echo (isset($_POST['type']) && $_POST['type'] == 'like') ? 'selected' : ''; ?>>Like</option>
+            <option value="comment" <?php echo (isset($_POST['type']) && $_POST['type'] == 'comment') ? 'selected' : ''; ?>>Comment</option>
+        </select>
+        <select name="jumlah" id="jumlah" required class="select" style="margin-left : 0px;">
+            <option value="banyak" <?php echo (isset($_POST['jumlah']) && $_POST['jumlah'] == 'banyak') ? 'selected' : ''; ?>>Paling banyak</option>
+            <option value="dikit" <?php echo (isset($_POST['jumlah']) && $_POST['jumlah'] == 'dikit') ? 'selected' : ''; ?>>Paling sedikit</option>
+        </select>
+        <button type="submit" name="filter" class="button_menu">Filter</button>
+    </form>
     <div class="card-container">
         <?php
         $unread = mysqli_query($conn, "SELECT COUNT(*) AS unread FROM `notifikasi` WHERE `penerima_id` = $id AND `pengirim_id` != $id AND `is_read` = 0");
         $result = mysqli_fetch_assoc($unread);
 
-        if (isset($_POST['filter'])) {
-            $type = $_POST['type'];
-            $jumlah = $_POST['jumlah'];
-            if ($type == 'like') {
-                if ($jumlah == 'banyak') {
-                    $query = "SELECT foto.*,user.username, COUNT(like_foto.foto_id) AS total_like 
-                              FROM foto INNER JOIN user ON foto.user_id = user.user_id LEFT JOIN like_foto ON foto.foto_id = like_foto.foto_id 
-                              GROUP BY foto.foto_id ORDER BY total_like DESC";
-                }else{
-                    $query = "SELECT foto.*,user.username, COUNT(like_foto.foto_id) AS total_like 
-                    FROM foto INNER JOIN user ON foto.user_id = user.user_id LEFT JOIN like_foto ON foto.foto_id = like_foto.foto_id 
-                    GROUP BY foto.foto_id ORDER BY total_like ASC";
+        if (isset($_POST['search']) && !empty($_POST['isi'])) {
+            // Simpan hasil pencarian di $baseQuery
+            $search = mysqli_real_escape_string($conn, $_POST['isi']);
+            $baseQuery = "SELECT foto.foto_id, foto.judul_foto, user.username, foto.lokasi_file
+                          FROM foto 
+                          INNER JOIN user ON foto.user_id = user.user_id 
+                          WHERE judul_foto LIKE '%$search%' OR username LIKE '%$search%'";
+        
+            // Cek apakah ada filter
+            if (isset($_POST['filter'])) {
+                $type = $_POST['type'];
+                $jumlah = $_POST['jumlah'];
+        
+                if ($type == 'like') {
+                    $query = "SELECT subquery.*, COUNT(like_foto.foto_id) AS total_like 
+                              FROM ($baseQuery) AS subquery 
+                              LEFT JOIN like_foto ON subquery.foto_id = like_foto.foto_id 
+                              GROUP BY subquery.foto_id 
+                              ORDER BY total_like " . ($jumlah == 'banyak' ? "DESC" : "ASC");
+                } elseif ($type == 'comment') {
+                    $query = "SELECT subquery.*, COUNT(komentar_foto.foto_id) AS total_comment 
+                              FROM ($baseQuery) AS subquery 
+                              LEFT JOIN komentar_foto ON subquery.foto_id = komentar_foto.foto_id 
+                              GROUP BY subquery.foto_id 
+                              ORDER BY total_comment " . ($jumlah == 'banyak' ? "DESC" : "ASC");
+                } else {
+                    // Jika filter tidak dikenali, gunakan hasil pencarian saja
+                    $query = $baseQuery;
                 }
-            }elseif ($type == 'comment') {
-                if ($jumlah == 'banyak') {
-                    $query = "SELECT foto.*,user.username, COUNT(komentar_foto.foto_id) AS total_like 
-                              FROM foto INNER JOIN user ON foto.user_id = user.user_id LEFT JOIN komentar_foto ON foto.foto_id = komentar_foto.foto_id 
-                              GROUP BY foto.foto_id ORDER BY total_like DESC";
-                }else{
-                    $query = "SELECT foto.*,user.username, COUNT(komentar_foto.foto_id) AS total_like 
-                    FROM foto INNER JOIN user ON foto.user_id = user.user_id LEFT JOIN komentar_foto ON foto.foto_id = komentar_foto.foto_id 
-                    GROUP BY foto.foto_id ORDER BY total_like ASC";
+            } else {
+                // Jika hanya mencari tanpa filter
+                $query = $baseQuery;
+            }
+        } else {
+            // Jika tidak ada pencarian
+            if (isset($_POST['filter'])) {
+                $type = $_POST['type'];
+                $jumlah = $_POST['jumlah'];
+        
+                if ($type == 'like') {
+                    $query = "SELECT foto.*, user.username, COUNT(like_foto.foto_id) AS total_like 
+                              FROM foto 
+                              INNER JOIN user ON foto.user_id = user.user_id 
+                              LEFT JOIN like_foto ON foto.foto_id = like_foto.foto_id 
+                              GROUP BY foto.foto_id 
+                              ORDER BY total_like " . ($jumlah == 'banyak' ? "DESC" : "ASC");
+                } elseif ($type == 'comment') {
+                    $query = "SELECT foto.*, user.username, COUNT(komentar_foto.foto_id) AS total_comment 
+                              FROM foto 
+                              INNER JOIN user ON foto.user_id = user.user_id 
+                              LEFT JOIN komentar_foto ON foto.foto_id = komentar_foto.foto_id 
+                              GROUP BY foto.foto_id 
+                              ORDER BY total_comment " . ($jumlah == 'banyak' ? "DESC" : "ASC");
                 }
+            } else {
+                // Jika tidak ada filter dan tidak ada search, tampilkan semua data
+                $query = "SELECT * FROM foto INNER JOIN user ON foto.user_id = user.user_id";
             }
         }
-
-        if (isset($_POST['search'])) {
-           
-                $search = mysqli_real_escape_string($conn,$_POST['isi']);
-                $query = "SELECT * FROM `foto` INNER JOIN `user` ON `foto`.`user_id` = `user`.`user_id` WHERE `judul_foto` LIKE '%$search%' OR `username` LIKE '%$search%'"; 
-        } else {
-            $query = "SELECT * FROM `foto` INNER JOIN `user` ON `foto`.`user_id` = `user`.`user_id`";
-        }
+        
         $hasil = mysqli_query($conn, $query);
+
+
 
         if ($result['unread'] > 0) {
             echo "<script>
@@ -135,7 +178,6 @@ $role = $_SESSION['role'];
 </html>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js">
-
     window.addEventListener('pageshow', function(event) {
         if (event.persisted) {
             location.reload();
