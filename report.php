@@ -3,30 +3,39 @@ include "connection.php";
 $id = $_SESSION['id'];
 $role = $_SESSION['role'];
 
-// Query untuk mendapatkan tahun terawal dan terakhir dari data like
+// Query untuk mendapatkan tahun yang ada data like
 $query_tahun_like = mysqli_query($conn, "
-    SELECT MIN(YEAR(tanggal_like)) AS tahun_min, MAX(YEAR(tanggal_like)) AS tahun_max 
-    FROM like_foto 
+    SELECT DISTINCT YEAR(tanggal_like) AS tahun
+    FROM like_foto
     WHERE penerima_id = $id
 ");
-$tahun_like = mysqli_fetch_assoc($query_tahun_like);
-$tahun_min_like = $tahun_like['tahun_min'];
-$tahun_max_like = $tahun_like['tahun_max'];
+$tahun_like = [];
+while ($row = mysqli_fetch_assoc($query_tahun_like)) {
+    $tahun_like[] = $row['tahun'];
+}
 
-// Query untuk mendapatkan tahun terawal dan terakhir dari data komentar
+// Query untuk mendapatkan tahun yang ada data komentar
 $query_tahun_comment = mysqli_query($conn, "
-    SELECT MIN(YEAR(tanggal_komentar)) AS tahun_min, MAX(YEAR(tanggal_komentar)) AS tahun_max 
-    FROM komentar_foto 
+    SELECT DISTINCT YEAR(tanggal_komentar) AS tahun
+    FROM komentar_foto
     WHERE penerima_id = $id
 ");
-$tahun_comment = mysqli_fetch_assoc($query_tahun_comment);
-$tahun_min_comment = $tahun_comment['tahun_min'];
-$tahun_max_comment = $tahun_comment['tahun_max'];
+$tahun_comment = [];
+while ($row = mysqli_fetch_assoc($query_tahun_comment)) {
+    $tahun_comment[] = $row['tahun'];
+}
 
-// Mengambil rentang tahun untuk filter (tahun terbesar dan terkecil antara like dan comment)
-$tahun_min = min($tahun_min_like, $tahun_min_comment);
-$tahun_max = max($tahun_max_like, $tahun_max_comment);
+// Gabungkan kedua array tahun like dan comment
+$tahun_data = array_unique(array_merge($tahun_like, $tahun_comment));
 
+// Tambahkan tahun sekarang ke dalam array tahun data jika belum ada
+$tahun_sekarang = date('Y');
+if (!in_array($tahun_sekarang, $tahun_data)) {
+    $tahun_data[] = $tahun_sekarang;
+}
+
+// Urutkan tahun data
+sort($tahun_data);
 ?>
 
 <!DOCTYPE html>
@@ -105,20 +114,26 @@ $foto_like_terbanyak = mysqli_fetch_assoc($query_likes);
 $foto_comment_terbanyak = mysqli_fetch_assoc($query_comments);
     ?>
     <center>
-        <div class="main-container">
-            <div style="margin-left:-90%;">
-            <form method="GET" action="">
+    <?php
+    ?>
+    <div class="main-container">
+        <div style="margin-left:-90%;">
+        <form method="GET" action="">
     <select name="tahun" onchange="this.form.submit()">
         <?php
+        // Ambil tahun yang dipilih, default ke tahun sekarang
         $tahun_sekarang = isset($_GET['tahun']) ? $_GET['tahun'] : date('Y');
-        for ($i = $tahun_min - 1; $i <= $tahun_max + 1; $i++) {
-            $selected = ($tahun_sekarang == $i) ? 'selected' : '';
-            echo "<option value='{$i}' {$selected}>{$i}</option>";
+
+        // Tampilkan dropdown dengan tahun-tahun yang valid
+        foreach ($tahun_data as $tahun) {
+            $selected = ($tahun_sekarang == $tahun) ? 'selected' : '';
+            echo "<option value='{$tahun}' {$selected}>{$tahun}</option>";
         }
         ?>
     </select>
 </form>
-            </div>
+        </div>
+
 
             <div class="year-stats">
                 <?php
