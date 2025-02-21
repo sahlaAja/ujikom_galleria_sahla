@@ -42,7 +42,7 @@ if (mysqli_num_rows($query) > 0) {
         ";
     }
 } else {
-    $query_like = mysqli_query($conn, "INSERT INTO `like_foto` (foto_id, user_id, penerima_id, tanggal_like) VALUES ('$id', '$penerima_id','$user','$date')");
+    $query_like = mysqli_query($conn, "INSERT INTO `like_foto` (foto_id, user_id, penerima_id, tanggal_like) VALUES ('$id','$user' , '$penerima_id','$date')");
     if ($query_like) {
         // Ambil username untuk notifikasi
         $user_query = mysqli_query($conn, "SELECT `username` FROM `user` WHERE `user_id` = $user");

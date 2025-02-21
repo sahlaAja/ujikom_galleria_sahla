@@ -2,6 +2,31 @@
 include "connection.php";
 $id = $_SESSION['id'];
 $role = $_SESSION['role'];
+
+// Query untuk mendapatkan tahun terawal dan terakhir dari data like
+$query_tahun_like = mysqli_query($conn, "
+    SELECT MIN(YEAR(tanggal_like)) AS tahun_min, MAX(YEAR(tanggal_like)) AS tahun_max 
+    FROM like_foto 
+    WHERE penerima_id = $id
+");
+$tahun_like = mysqli_fetch_assoc($query_tahun_like);
+$tahun_min_like = $tahun_like['tahun_min'];
+$tahun_max_like = $tahun_like['tahun_max'];
+
+// Query untuk mendapatkan tahun terawal dan terakhir dari data komentar
+$query_tahun_comment = mysqli_query($conn, "
+    SELECT MIN(YEAR(tanggal_komentar)) AS tahun_min, MAX(YEAR(tanggal_komentar)) AS tahun_max 
+    FROM komentar_foto 
+    WHERE penerima_id = $id
+");
+$tahun_comment = mysqli_fetch_assoc($query_tahun_comment);
+$tahun_min_comment = $tahun_comment['tahun_min'];
+$tahun_max_comment = $tahun_comment['tahun_max'];
+
+// Mengambil rentang tahun untuk filter (tahun terbesar dan terkecil antara like dan comment)
+$tahun_min = min($tahun_min_like, $tahun_min_comment);
+$tahun_max = max($tahun_max_like, $tahun_max_comment);
+
 ?>
 
 <!DOCTYPE html>
@@ -14,139 +39,7 @@ $role = $_SESSION['role'];
     <link rel="stylesheet" href="asset.css">
     <link rel="stylesheet" href="Asset/bootstrap/dist/css/bootstrap.min.css">
     <script src="Asset/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <style>
-        .main-container {
-            background: #444e80;
-            color: #abafc6;
-            border-radius: 5px;
-            padding: 20px;
-            width: 80%;
-            height: 350px;
-            margin-left: -50px;
-        }
-        .year-stats {
-            white-space: nowrap;
-            max-height: 210px;
-            overflow: hidden;
-        }
-        .year-stats:hover {
-            overflow-x: auto;
-        }
-        /* SCROLL BAR STYLE (ONLY WORKS IN CHROME) */
-        /* Width */
-        ::-webkit-scrollbar {
-            height: 5px;
-            width: 100%;
-        }
-        /* Track */
-        ::-webkit-scrollbar-track {
-            background: #444e80;
-        }
-        /* Handle */
-        ::-webkit-scrollbar-thumb {
-            background: #abafc6;
-            border-radius: 10px;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #5397d6;
-        }
-        .month-group {
-            cursor: pointer;
-            max-width: 400px;
-            height: 500px;
-            margin: 10px;
-            margin-top: 20px;
-            display: inline-block;
-        }
-        .bar-container {
-            display: flex;
-            align-items: flex-end;
-            height: 160px;
-            width: 30px;
-            gap: 2px;
-
-        }
-        .bar {
-            position: relative;
-            width: 12px;
-            transition: 0.3s;
-        }
-        .bar::after {
-            content: attr(data-count);
-            position: absolute;
-            top: -20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: rgba(0, 0, 0, 0.7);
-            color: white;
-            padding: 3px 5px;
-            border-radius: 5px;
-            font-size: 12px;
-            white-space: nowrap;
-            opacity: 0;
-            transition: opacity 0.2s;
-            pointer-events: none;
-        }
-        .bar:hover::after {
-            opacity: 1;
-        }
-        .like-bar {
-            margin-top: 50px;
-            background-color: blue;
-        }
-        .comment-bar {
-            background-color: orange;
-        }
-        .month-group:hover p,
-        .selected p {
-            color: #fff;
-        }
-        .h-25 {
-            height: 25%;
-        }
-        .h-50 {
-            height: 50%;
-        }
-        .h-75 {
-            height: 75%;
-        }
-        .h-100 {
-            height: 100%;
-        }
-        .info p {
-            margin-bottom: 10px;
-        }
-        .info span {
-            color: #fff;
-        }
-        .legend {
-        display: flex;
-        justify-content: center;
-        gap: 20px;
-        margin-top: 10px;
-        font-size: 14px;
-    }
-
-    .legend .legend-item {
-        display: flex;
-        align-items: center;
-        gap: 5px;
-    }
-
-    .legend .color-box {
-        width: 15px;
-        height: 15px;
-        display: inline-block;
-    }
-
-    .color-like {
-        background-color: blue;
-    }
-
-    .color-comment {
-        background-color: orange;
-    }
-    </style>
+    <link rel="stylesheet" href="report.css">
 </head>
 
 <body style="background-color: beige;">
@@ -172,8 +65,10 @@ $role = $_SESSION['role'];
     $row_foto_count = mysqli_fetch_assoc($query_foto_count);
     $total_foto = $row_foto_count['total_foto'];
 
+    $tahun = isset($_GET['tahun']) ? $_GET['tahun'] : date('Y');
+
     $query_like_per_month = mysqli_query($conn, "SELECT MONTH(tanggal_like) AS bulan, COUNT(*) AS total_like FROM like_foto 
-            WHERE penerima_id = $id GROUP BY MONTH(tanggal_like)");
+            WHERE penerima_id = $id AND YEAR(tanggal_like) = $tahun GROUP BY MONTH(tanggal_like)");
     $like_per_month = [];
     while ($row = mysqli_fetch_assoc($query_like_per_month)) {
         $like_per_month[$row['bulan']] = $row['total_like'];
@@ -185,7 +80,7 @@ $role = $_SESSION['role'];
 
     // Ambil data komentar per bulan
     $query_comment_per_month = mysqli_query($conn, "SELECT MONTH(tanggal_komentar) AS bulan, COUNT(*) AS total_comment FROM komentar_foto 
-    WHERE penerima_id = $id 
+    WHERE penerima_id = $id AND YEAR(tanggal_komentar) = $tahun
     GROUP BY MONTH(tanggal_komentar)");
 
     $comment_per_month = [];
@@ -199,11 +94,11 @@ $role = $_SESSION['role'];
     }
 
     $query_likes = mysqli_query($conn, "SELECT foto.*,user.username, COUNT(like_foto.foto_id) AS total_like 
-                              FROM foto INNER JOIN user ON foto.user_id = user.user_id INNER JOIN like_foto ON foto.foto_id = like_foto.foto_id 
-                              GROUP BY foto.foto_id ORDER BY total_like DESC limit 1");
+                              FROM foto INNER JOIN user ON foto.user_id = user.user_id INNER JOIN like_foto ON foto.foto_id = like_foto.foto_id WHERE like_foto.penerima_id = $id 
+                              GROUP BY foto.foto_id  ORDER BY total_like DESC limit 1");
 
     $query_comments = mysqli_query($conn, "SELECT foto.*,user.username, COUNT(komentar_foto.foto_id) AS total_comment
-                              FROM foto INNER JOIN user ON foto.user_id = user.user_id INNER JOIN komentar_foto ON foto.foto_id = komentar_foto.foto_id 
+                              FROM foto INNER JOIN user ON foto.user_id = user.user_id INNER JOIN komentar_foto ON foto.foto_id = komentar_foto.foto_id WHERE komentar_foto.penerima_id = $id
                               GROUP BY foto.foto_id ORDER BY total_comment DESC limit 1");
 
 $foto_like_terbanyak = mysqli_fetch_assoc($query_likes);
@@ -211,6 +106,20 @@ $foto_comment_terbanyak = mysqli_fetch_assoc($query_comments);
     ?>
     <center>
         <div class="main-container">
+            <div style="margin-left:-90%;">
+            <form method="GET" action="">
+    <select name="tahun" onchange="this.form.submit()">
+        <?php
+        $tahun_sekarang = isset($_GET['tahun']) ? $_GET['tahun'] : date('Y');
+        for ($i = $tahun_min - 1; $i <= $tahun_max + 1; $i++) {
+            $selected = ($tahun_sekarang == $i) ? 'selected' : '';
+            echo "<option value='{$i}' {$selected}>{$i}</option>";
+        }
+        ?>
+    </select>
+</form>
+            </div>
+
             <div class="year-stats">
                 <?php
                 $months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
@@ -243,8 +152,17 @@ $foto_comment_terbanyak = mysqli_fetch_assoc($query_comments);
     </div>
 </div>
             <div class="info" style="display: flex; padding:10px; white-space:nowrap; margin-top:5px;">
+                <?php
+                if ($foto_like_terbanyak == NULL) {
+                    echo "<p>Most Likes <br /><span>No Data</span></p>";
+                }else{
+                ?>
                 <p>Most Likes <br /><span><?php echo $foto_like_terbanyak['judul_foto']?> | <i><?php echo $foto_like_terbanyak['total_like']?> Likes</i></span></p>
+                <?php } if ($foto_comment_terbanyak == NULL) {
+                    echo "<p style='margin-left: 3%;'>Most Comments <br /><span>No Data</span></p>";
+                }else{?>
                 <p style="margin-left: 3%;">Most Comments <br><span><?php echo $foto_comment_terbanyak['judul_foto']?> | <i><?php echo $foto_comment_terbanyak['total_comment']?> Comments</i></span></p>
+                <?php } ?>
             </div>
         </div>
         </div>

@@ -1,4 +1,4 @@
-<?php
+                                                    <?php
 include "header.php";
 $id = $_SESSION['id'];
 $role = $_SESSION['role'];
@@ -145,13 +145,12 @@ $role = $_SESSION['role'];
                             <?php } ?>
                             <td><span><a href="detail_foto.php?id=<?php echo $row['foto_id'] ?>"><img src="Asset/icon/comment.svg" width="16px" height="16px"></a></span></td>
                             <td><?php echo $total_komentar ?></td>
-                            <?php if ($role == 'USER') { ?>
+                            
                                 <td><span><a href="unduh.php?file=<?php echo $row['lokasi_file'] ?>" onclick="return confirm('Apakah  anda ingin mengunduh foto ini?')"><img src="Asset/icon/import.svg" width="16px" height="16px"></a></span></td>
-                            <?php } ?>
                             <td><img src="Asset/icon/elipsis.svg" width="16px" height="16px" title="Detail like" style="margin-top: 3px; cursor:pointer;" class="openModal" data-id="<?php echo $row['foto_id'] ?>"></td>
 
                             <div id="likeModal<?php echo $row['foto_id'] ?>" class="modal" style="width:400px;height: 300px; display: none;top: 50%; left: 50%; transform: translate(-50%, -50%); width:auto;
-                            background: white; padding: 20px; box-shadow: 0px 0px 10px rgba(0,0,0,0.5);">
+                                 background: white; padding: 20px; box-shadow: 0px 0px 10px rgba(0,0,0,0.5);">
                                 <h3>Riwayat Like "<?php echo $row['judul_foto'] ?>"</h3>
                                 <?php
                                 if ($total_like == 0) {
@@ -165,6 +164,7 @@ $role = $_SESSION['role'];
                                 ?>
                                 <br><br>
                                 <button class="closeModal btn btn-outline-info" data-id="<?php echo $row['foto_id']; ?>">Tutup</button>
+                            </div>
                         </tr>
                     </table>
                 </center>
@@ -177,7 +177,7 @@ $role = $_SESSION['role'];
 
 </html>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js">
+<script>
     window.addEventListener('pageshow', function(event) {
         if (event.persisted) {
             location.reload();
