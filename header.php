@@ -151,19 +151,6 @@ $role = $_SESSION['role'];
         <div class="header">
             <img src="Asset/img/logo.png" class="logo1">
             <button class="button_menu" style="background-color: grey; margin-left : 10px; width:200px; height:35px; margin-top:2px;"><a href="master_user.php" class="a">Master User</a></button>
-            <form method="POST" action="dashboard.php">
-                <select name="type" id="type" required class="select">
-                    <option value="like" <?php echo (isset($_POST['type']) && $_POST['type'] == 'like') ? 'selected' : ''; ?>>Like</option>
-                    <option value="comment" <?php echo (isset($_POST['type']) && $_POST['type'] == 'comment') ? 'selected' : ''; ?>>Comment</option>
-                </select>
-                <select name="jumlah" id="jumlah" required class="select">
-                    <option value="banyak" <?php echo (isset($_POST['jumlah']) && $_POST['jumlah'] == 'banyak') ? 'selected' : ''; ?>>Paling banyak</option>
-                    <option value="dikit" <?php echo (isset($_POST['jumlah']) && $_POST['jumlah'] == 'dikit') ? 'selected' : ''; ?>>Paling sedikit</option>
-                </select>
-                <button type="submit" name="search" class="button">
-                    <center><img src="Asset/icon/search.svg" width="16px" height="16px" style="margin-top: -5px;"></center>
-                </button>
-            </form>
             <img src="Asset/icon/reset.svg" width="36px" height="36px" class="icon" title="reset" name="reset" onclick="resetSearch()" style="margin-top: -1px;">
             <span><a href="tambah_user.php"><i class="uil uil-plus" style="font-size: 36px;" title="Tambah Admin"></i></a></span>
             <span><img src="Asset/icon/logout.svg" class="icon" width="36px" height="36px" title="logout" onclick="confirmLogout()" style="margin-top: -2px;"></span>
